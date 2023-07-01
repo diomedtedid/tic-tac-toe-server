@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.proskura.tictactoeserver.model.common.Player;
 import org.proskura.tictactoeserver.model.session.Setting;
 
+import java.util.List;
 import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,16 +37,20 @@ class GameProcessorImplTest {
         Player player = new Player();
         player.setBot(isBot);
 
-        Setting figureSetting = gameProcessor.getGameSettings(player).stream()
+        List<Setting> gameSettings = gameProcessor.getGameSettings(player);
+
+        Setting figureSetting = gameSettings.stream()
                 .filter(setting -> Objects.equals(setting.getSetting(), FIGURE_SETTING))
                 .findFirst()
                 .orElseThrow();
 
+        assertEquals(1, gameSettings.size());
 
         if (isBot) {
             assertEquals("O", figureSetting.getValue());
         } else {
             assertEquals("X", figureSetting.getValue());
         }
+
     }
 }

@@ -20,7 +20,6 @@ public class GameProcessorImpl implements GameProcessor {
 
     @Override
     public List<Setting> getGameSettings(Player player) {
-        List<Setting> settingList = new ArrayList<>();
         return List.of(new Setting(FIGURE_SETTING, player.isBot() ? "O" : "X"));
     }
 }
