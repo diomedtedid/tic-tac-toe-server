@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:tictactoe
+    username: troy
+    password: password
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+#    defer-datasource-initialization: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+  h2:
+    console.enabled: true
+
+app:
+  ws:
+    applicationDestinationPrefix: /app
+    destinationPrefix: /topic
+    endpoint: /tic-tac-toe
+    heartbeatTopic: ${app.ws.destinationPrefix}/heartbeat
+    gameTopic: ${app.ws.destinationPrefix}/game/
+  heartbeat:
+    period: 60000
+    message: It's alive!
